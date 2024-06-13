@@ -2,7 +2,11 @@ const firebaseService = require('../services/firebaseService');
 
 const handleIncomingMessage = async (req, res) => {
   try {
-    const { From, Body } = req.body;
+    const From = req.body.From;
+    const Body = req.body.Body;
+
+    console.log(From);
+    console.log(Body);
 
     await firebaseService.saveMessage(From, Body);
 
