@@ -1,10 +1,12 @@
 const admin = require('firebase-admin');
-const serviceAccount = require('../../firebaseKey.json');
+const path = require('path');
+
+const serviceAccountPath = '/etc/secrets/firebaseKey.json';
 
 const initializeFirebase = () => {
+  const serviceAccount = require(serviceAccountPath);
   admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount),
-    //databaseURL: 'https://your-database-name.firebaseio.com'
+    credential: admin.credential.cert(serviceAccount)
   });
 };
 
