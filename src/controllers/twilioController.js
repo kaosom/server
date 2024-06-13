@@ -6,8 +6,8 @@ const handleIncomingMessage = async (req, res) => {
     console.log('Solicitud entrante recibida en /twilio-webhook');
     console.log('Datos del cuerpo de la solicitud:', req.body);
 
-    const From = req.From;
-    const Body = req.Body; 
+    const From = req.body.From;
+    const Body = req.body.Body;
 
     // Registrar los valores extraídos
     console.log('From:', From);
