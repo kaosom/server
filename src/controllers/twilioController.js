@@ -2,17 +2,26 @@ const firebaseService = require('../services/firebaseService');
 
 const handleIncomingMessage = async (req, res) => {
   try {
-    const From = req.body.From;
-    const Body = req.body.Body;
+    // Registrar la solicitud entrante
+    console.log('Solicitud entrante recibida en /twilio-webhook');
+    console.log('Datos del cuerpo de la solicitud:', req.body);
 
-    console.log(From);
-    console.log(Body);
+    const { From, Body } = req.body;
 
+    // Registrar los valores extraídos
+    console.log('From:', From);
+    console.log('Body:', Body);
+
+    // Subir el mensaje a Firebase
     await firebaseService.saveMessage(From, Body);
+
+    // Registrar éxito
+    console.log('Mensaje subido a Firebase con éxito');
 
     res.set('Content-Type', 'text/xml');
     res.send('<Response></Response>');
   } catch (error) {
+    // Registrar error
     console.error('Error subiendo a Firebase:', error);
     res.status(500).send('Error subiendo a Firebase');
   }
